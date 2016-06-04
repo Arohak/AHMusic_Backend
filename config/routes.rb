@@ -1,6 +1,22 @@
 Rails.application.routes.draw do
   get 'users/new'
 
+  namespace :api do
+    namespace :v1 do
+      resources :profiles do
+        get :me, on: :collection
+      end
+    end
+  end
+
+  namespace :api, path: '/', constraints: { subdomain: 'api' } do
+    namespace :v1 do
+      resources :profiles do
+        get :me, on: :collection
+      end
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -55,4 +71,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
+end #
