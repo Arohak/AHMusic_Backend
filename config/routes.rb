@@ -1,35 +1,21 @@
 Rails.application.routes.draw do
+
   root 'homes#index'
-
   resources :users, except: [:new]
-
   get '/register', to: 'users#new'
-
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'
-
   get '/logout', to: 'logins#destroy'
 
   namespace :api do
     namespace :v1 do
-      resources :profiles do
-        get :me, on: :collection
-      end
-    end
-  end
+      # get 'profiles/signin', to: 'profiles#signin'
+      # get 'profiles/signup', to: 'profiles#signup'
 
-  namespace :api, path: '/', constraints: { subdomain: 'api' } do
-    namespace :v1 do
       resources :profiles do
-        get :me, on: :collection
-      end
-    end
-  end
-
-  namespace :api do
-    namespace :v1 do
-      resources :profiles do
-        get :me, on: :collection
+        # get :me, on: :collection
+        get :signin, on: :collection
+        get :signup, on: :collection
       end
     end
   end
