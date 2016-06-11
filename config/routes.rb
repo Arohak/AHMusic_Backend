@@ -17,6 +17,21 @@ Rails.application.routes.draw do
         get :signin, on: :collection
         get :signup, on: :collection
       end
+
+      resources :genres, only: [:index]
+      resources :albums, only: [:show]
+      resources :artists, only: [:show]
+      resources :playlists, only: [:show]
+      resources :tracks, only: [:show]
+
+      get '/artistst', to: 'artistst#tracks'
+
+      get '/search', to: 'search#all'
+      get '/search/album', to: 'search#album'
+      get '/search/artist', to: 'search#artist'
+      get '/search/playlist', to: 'search#playlist'
+      get '/search/track', to: 'search#track'
+
     end
   end
 
